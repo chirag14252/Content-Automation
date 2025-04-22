@@ -36,7 +36,7 @@ def extract_content_mapping(content,version):
             puzzle_id = int(row[PUZZLE_ID])
            
             level_map[level] = {
-                    "pid": f"p{puzzle_id}",
+                    "pid": f"{puzzle_id}",
                     "bc": {
                         "bp" : bot_profile,
                         "cr": c_req,
