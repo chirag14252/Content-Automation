@@ -33,7 +33,7 @@ def extract_content_mapping(content,version):
             mid_threshold = float(row[MID_THRESHOLD].rstrip('%')) / 100
             empty_cell_threshhold = int(row[EMPTY_CELL_THRESHOLD])
             c_req = float(row[C_REQ].rstrip('%')) / 100
-            puzzle_id = row[PUZZLE_ID]
+            puzzle_id = row[PUZZLE_ID].strip()
            
             level_map[level] = {
                     "pid": puzzle_id,
