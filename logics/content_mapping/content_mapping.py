@@ -6,15 +6,6 @@ from collections import OrderedDict
 # - after clicking on the download button the content mapping will be downloaded in the json format.
 
 
-def get_bot_profile_general(bot_profile_v1):
-    if bot_profile_v1[0] == "E":
-        return "Easy"
-    elif bot_profile_v1[0] == "M":
-        return "Medium"
-    elif bot_profile_v1[0] == "H":
-        return "Hard"
-    else:
-        return "Easy"
 
 def extract_content_mapping(content,version):
  
@@ -47,7 +38,6 @@ def extract_content_mapping(content,version):
             level_map[level] = {
                     "pid": puzzle_id,
                     "bc": {
-                        "b": get_bot_profile_general(bot_profile),
                         "bp" : bot_profile,
                         "cr": c_req,
                         "ect": empty_cell_threshhold,

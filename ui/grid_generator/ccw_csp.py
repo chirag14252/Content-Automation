@@ -564,7 +564,7 @@ def read_word_groups(file_path=const.GROUPED_WORD_PATH):
 TOTAL_PUZZLES_TO_GENERATE=50
 
 def fill_grid_completely(start_puzzle_num=None,num_puzzles=5, use_quick_check=True, previous_content=None):
-    num_of_formats = 15
+    num_of_formats = 6
     counter = 0
     reattempt = False
     generated_grids = []
@@ -588,9 +588,9 @@ def fill_grid_completely(start_puzzle_num=None,num_puzzles=5, use_quick_check=Tr
             if not reattempt:
                 use_quick_check = True
                 
-            if ((counter % num_of_formats) + 1 == 6):
-                counter += 1
-                continue
+            # if ((counter % num_of_formats) + 1 == 6):
+            #     counter += 1
+            #     continue
             
             file_path = os.path.join(logics_path, const.LAYOUTS_PATH)
             crossword = Crossword(file_path + str((counter % num_of_formats) + 1) + '.txt')
@@ -624,6 +624,13 @@ def fill_grid_completely(start_puzzle_num=None,num_puzzles=5, use_quick_check=Tr
                 counter += 1
                 current_puzzle_num += 1
                 reattempt = False
+
+                tsv_content = generate_grid_clues_tsv(generated_grids)
+                # Dump the TSV content to a file
+                os.makedirs('./logics/grid_generator/outputs', exist_ok=True)
+                tsv_output_path = os.path.join('logics/grid_generator/outputs', 'grid_clues.tsv')
+                with open(tsv_output_path, "w") as tsv_file:
+                    tsv_file.write(tsv_content)
                 i+=1
                 
             progress_bar.progress((i) / num_puzzles)
@@ -638,7 +645,7 @@ def fill_grid_completely(start_puzzle_num=None,num_puzzles=5, use_quick_check=Tr
 
 
 def load_word_index_maps():
-    file_path = os.path.join(logics_path, 'word_index.json')
+    file_path = os.path.join(logics_path, 'calc.json')
     with open(file_path, 'r') as f:
         return json.load(f)
     
